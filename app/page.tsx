@@ -5,6 +5,8 @@ import WhatIDo from "@/components/WhatIDo";
 import CaseStudy, { type CaseStudyData } from "@/components/CaseStudy";
 import AIProjects from "@/components/AIProjects";
 import About from "@/components/About";
+import CTA from "@/components/CTA";
+import Footer from "@/components/Footer";
 
 const caseStudies: { data: CaseStudyData; reversed: boolean }[] = [
   {
@@ -95,7 +97,7 @@ export default function Home() {
         <Hero />
         <CredibilityStrip />
         <WhatIDo />
-        {caseStudies.map((cs, i) => (
+        {caseStudies.map((cs) => (
           <div key={cs.data.title}>
             <div className="section-glow" />
             <CaseStudy data={cs.data} reversed={cs.reversed} />
@@ -106,6 +108,8 @@ export default function Home() {
         <div className="section-glow" />
         <About />
       </main>
+      <CTA />
+      <Footer />
     </>
   );
 }
