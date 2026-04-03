@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b0e14;
+  --color-surface: #131720;
+  --color-elevated: #1a1f2b;
+  --color-border: #252d3a;
+  --color-text-primary: #ffffff;
+  --color-text-body: #b0b8c4;
+  --color-text-muted: #6b7a8d;
+  --color-accent: #4A6FA5;
+  --color-accent-light: #5a8abf;
+
+  --max-width-content: 1200px;
+  --max-width-about: 680px;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-body);
+  }
+}
+
+/* Scroll animation classes */
+@layer utilities {
+  .anim {
+    opacity: 0;
+    transition-property: all;
+    transition-duration: 700ms;
+    transition-timing-function: var(--ease-out-expo);
+  }
+  .anim.visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+  }
+  .anim-fade-up {
+    transform: translateY(30px);
+  }
+  .anim-fade-left {
+    transform: translateX(-40px);
+  }
+  .anim-fade-right {
+    transform: translateX(40px);
+  }
+  .anim-scale-up {
+    transform: scale(0.92);
+  }
+  .anim-slide-left {
+    transform: translateX(-30px);
+  }
+}
+
+/* Hero load animations — CSS keyframes, not scroll-triggered */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroScaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hero-animate-1 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+.hero-animate-2 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+.hero-animate-3 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
+.hero-animate-4 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
+.hero-animate-image { opacity: 0; animation: heroScaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+
+/* Stagger delays for scroll animations */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .anim, .hero-animate-1, .hero-animate-2, .hero-animate-3, .hero-animate-4, .hero-animate-image {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Section glow divider */
+.section-glow {
+  height: 1px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent 0%, rgba(74,111,165,0.25) 50%, transparent 100%);
+}
