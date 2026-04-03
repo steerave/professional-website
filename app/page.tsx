@@ -1,7 +1,12 @@
+import Nav from "@/components/Nav";
+
 export default function Home() {
   return (
-    <main>
-      <p className="text-text-primary p-20">Site coming together...</p>
-    </main>
+    <>
+      <Nav />
+      <main>
+        <p className="p-20 text-text-primary">Site coming together...</p>
+      </main>
+    </>
   );
 }
