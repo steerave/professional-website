@@ -3,43 +3,50 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { target: "20+", numeric: 20, suffix: "+", label: "Years of Experience" },
-  { target: "30+", numeric: 30, suffix: "+", label: "Programs Launched" },
-  { target: "Millions", numeric: null, suffix: "", label: "Users Impacted" },
+  {
+    numeric: 20,
+    suffix: "+",
+    line1: "Years Leading",
+    line2: "Digital Execution",
+  },
+  {
+    numeric: 30,
+    suffix: "+",
+    line1: "National-Scale",
+    line2: "Programs Delivered",
+  },
+  {
+    numeric: 10,
+    suffix: "M+",
+    line1: "Users Supported",
+    line2: "in Live Systems",
+  },
 ];
 
-function useCountUp(target: number | null, targetText: string, active: boolean) {
-  const [display, setDisplay] = useState("0");
+function useCountUp(target: number, active: boolean) {
+  const [current, setCurrent] = useState(0);
+  const hasRun = useRef(false);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || hasRun.current) return;
+    hasRun.current = true;
 
-    if (target === null) {
-      const words = ["Thousands", "Hundreds of Thousands", "Millions"];
-      let i = 0;
-      const interval = setInterval(() => {
-        setDisplay(words[i]);
-        i++;
-        if (i >= words.length) clearInterval(interval);
-      }, 300);
-      return () => clearInterval(interval);
-    }
-
-    const duration = 1200;
+    const duration = 1400;
     const start = performance.now();
+
     function tick(now: number) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
+      // Smooth ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * target!);
-      setDisplay(current + (target === current ? targetText.replace(String(target), "") : ""));
+      setCurrent(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(tick);
-      else setDisplay(targetText);
     }
-    requestAnimationFrame(tick);
-  }, [active, target, targetText]);
 
-  return display;
+    requestAnimationFrame(tick);
+  }, [active, target]);
+
+  return current;
 }
 
 export default function CredibilityStrip() {
@@ -65,21 +72,22 @@ export default function CredibilityStrip() {
   return (
     <section
       aria-label="Key achievements"
-      className="border-y border-[rgba(74,111,165,0.15)] bg-surface"
+      className="border-y border-[rgba(74,111,165,0.12)] bg-surface"
     >
       <div
         ref={ref}
-        className="mx-auto flex max-w-content flex-col items-center gap-8 px-6 py-16 md:flex-row md:gap-0 md:px-10 lg:px-20"
+        className="mx-auto flex max-w-content flex-col items-center gap-10 px-6 py-14 md:flex-row md:gap-0 md:px-10 lg:px-20"
       >
         {stats.map((stat, i) => (
           <div
-            key={stat.label}
-            className={`flex-1 text-center md:px-8 ${
-              i < stats.length - 1 ? "md:border-r md:border-border" : ""
+            key={stat.line1}
+            className={`flex-1 text-center ${
+              i < stats.length - 1
+                ? "md:border-r md:border-[rgba(74,111,165,0.1)]"
+                : ""
             }`}
           >
             <StatNumber stat={stat} active={active} />
-            <div className="mt-2 font-mono text-sm text-text-muted">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -94,10 +102,26 @@ function StatNumber({
   stat: (typeof stats)[number];
   active: boolean;
 }) {
-  const display = useCountUp(stat.numeric, stat.target, active);
+  const count = useCountUp(stat.numeric, active);
+
   return (
-    <div className="text-[52px] font-bold leading-none text-accent-light">
-      {display}
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex items-baseline">
+        <span className="text-[40px] font-medium leading-none tracking-tight text-text-primary lg:text-[44px]">
+          {count}
+        </span>
+        <span className="ml-0.5 text-[22px] font-medium leading-none text-accent-light lg:text-[24px]">
+          {stat.suffix}
+        </span>
+      </div>
+      <div className="mt-1 flex flex-col items-center gap-0">
+        <span className="font-mono text-[12px] uppercase tracking-[0.15em] text-text-muted">
+          {stat.line1}
+        </span>
+        <span className="font-mono text-[12px] uppercase tracking-[0.15em] text-text-muted">
+          {stat.line2}
+        </span>
+      </div>
     </div>
   );
 }
