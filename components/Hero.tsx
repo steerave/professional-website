@@ -1,21 +1,30 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <section
       aria-label="Introduction"
       className="relative min-h-[90vh] overflow-hidden bg-bg"
     >
-      {/* Background image — swap src when Midjourney image is ready */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(135deg,#0f1520_0%,#1a2a3a_30%,#0b0e14_70%)] opacity-60" />
+      {/* Background image */}
+      <Image
+        src="/hero-bg.webp"
+        alt=""
+        fill
+        priority
+        className="pointer-events-none object-cover"
+        sizes="100vw"
+      />
 
-      {/* Dark overlay gradient for text readability */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(11,14,20,0.4)_0%,rgba(11,14,20,0.85)_70%)]" />
+      {/* Dark overlay for text readability */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(11,14,20,0.45)_0%,rgba(11,14,20,0.8)_60%,rgba(11,14,20,0.95)_100%)]" />
 
       {/* Bottom fade to page background */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1] h-[300px] bg-gradient-to-b from-transparent to-bg" />
 
-      {/* Accent glows */}
-      <div className="pointer-events-none absolute left-[10%] top-[20%] z-[1] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(74,111,165,0.15)_0%,transparent_60%)] blur-[80px]" />
-      <div className="pointer-events-none absolute bottom-[20%] right-[15%] z-[1] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(90,138,191,0.1)_0%,transparent_60%)] blur-[60px]" />
+      {/* Subtle accent glows on top of image */}
+      <div className="pointer-events-none absolute left-[10%] top-[20%] z-[1] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(74,111,165,0.12)_0%,transparent_60%)] blur-[80px]" />
+      <div className="pointer-events-none absolute bottom-[20%] right-[15%] z-[1] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(90,138,191,0.08)_0%,transparent_60%)] blur-[60px]" />
 
       {/* Content — single column, centered */}
       <div className="relative z-[2] mx-auto flex min-h-[90vh] max-w-content flex-col items-center justify-center px-6 py-[120px] text-center md:px-10 lg:px-20">
