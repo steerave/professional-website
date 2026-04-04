@@ -29,7 +29,7 @@ export default function Hero() {
       {/* Content — single column, centered */}
       <div className="relative z-[2] mx-auto flex min-h-[90vh] max-w-content flex-col items-center justify-center px-6 py-[120px] text-center md:px-10 lg:px-20">
         {/* Name — the hero */}
-        <h1 className="hero-animate-1 border-l border-white/20 pl-4 text-5xl font-medium uppercase leading-[0.95] tracking-[0.08em] text-text-primary md:pl-5 md:text-7xl lg:text-[84px]">
+        <h1 className="hero-animate-1 border-l border-white/20 pl-3 text-[clamp(2rem,10vw,5.25rem)] font-medium uppercase leading-[0.95] tracking-[0.05em] text-text-primary md:pl-5 md:tracking-[0.08em]">
           Sarun (Joe)
           <br />
           Teeravechyan
