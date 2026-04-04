@@ -181,6 +181,39 @@ export default function Home() {
         <AIProjects />
         <div className="section-glow" />
         <About />
+
+        {/* How This Site Was Built — reflective note */}
+        <section
+          aria-label="How this site was built"
+          className="mx-auto max-w-[640px] px-6 py-16 md:px-10 lg:py-20"
+        >
+          <ScrollReveal>
+            <h3 className="mb-5 text-lg font-medium tracking-tight text-text-primary/80">
+              How This Site Was Built
+            </h3>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <p className="mb-4 font-serif text-[15px] leading-[1.85] text-text-body/80">
+              This site was created using AI-assisted workflows across design,
+              copy, and development.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
+            <p className="mb-4 font-serif text-[15px] leading-[1.85] text-text-body/80">
+              The process involved exploring design directions, refining
+              structure and layout, and developing content around a clear
+              narrative and positioning — all through iterative collaboration
+              with AI systems.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={300}>
+            <p className="font-serif text-[15px] leading-[1.85] text-text-body/80">
+              This reflects how I approach applying AI in practice: not as a
+              shortcut, but as a way to improve clarity, accelerate iteration,
+              and enhance execution.
+            </p>
+          </ScrollReveal>
+        </section>
       </main>
       <CTA />
       <Footer />
