@@ -14,6 +14,7 @@
 - Added case study images (optimized from 1.3-1.5MB PNG to 36-55KB WebP each)
 - Updated typography system: Geist Sans for headings/UI, Newsreader for body, Geist Mono for labels
 - Redesigned credibility strip: refined 44px numbers, 2-line labels, consistent count-up to 20+/30+/10M+
+- Added reflective "How This Site Was Built" note above final CTA (narrow, muted, no tool names)
 - Generated 04042026_Website_Copydeck.md with all live copy as source of truth
 - Deployed to Vercel and set up custom domain joet.build
 
