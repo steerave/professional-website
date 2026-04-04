@@ -21,7 +21,7 @@ const caseStudies: { data: CaseStudyData; reversed: boolean }[] = [
       ],
       whatIDid: [
         "Established structured delivery framework",
-        "Implemented LIT, MUAT, Pilot testing phases",
+        "Engaged partner and client testing teams to execute a multi-phased testing approach",
         "Built communication and escalation pathways",
         "Partnered with engineering to mitigate risk",
       ],
