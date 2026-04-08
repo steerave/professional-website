@@ -1,5 +1,7 @@
 # Sarun (Joe) Teeravechyan — Portfolio Site
 
+<img width="1541" height="1145" alt="{C3CB2EDF-6ED2-4D50-AAC1-4D97E8541EBA}" src="https://github.com/user-attachments/assets/06339fec-eca6-46a4-bf18-adb569945b90" />
+
 Personal portfolio website showcasing digital leadership experience and AI projects.
 
 ## Tech Stack
