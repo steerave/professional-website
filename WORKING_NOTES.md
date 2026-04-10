@@ -1,21 +1,31 @@
 # WORKING_NOTES.md — Sarun (Joe) Teeravechyan Portfolio Site
 
 ## Current Status
-> First build pass complete. All 9 sections rendering with correct copy, animations, and responsive layout. Ready for visual refinement pass.
+> **v2.0 deployed to production (2026-04-10)**
+> Live at [joet.build](https://www.joet.build) — main branch, tagged `v2.0`.
 
 ---
 
 ## What's Been Done
+
+### v1.0 (2026-04-04)
 - Defined full site structure and section order
 - Finalized all copy in `personal_website_copy.md`
 - Created design system in `DESIGN_SYSTEM.md`
-- Created project guidelines in `CLAUDE.md`
-- Moved all project documents from `/docs` to project root
-- Updated CLAUDE.md with accessibility, performance, and responsive breakpoint standards
-- Resolved open questions (LinkedIn, email, name, credibility strip format)
-- Removed "How I Think" section from copy doc
-- Added AI-Powered Task Manager card to AI Projects copy
-- Updated credibility strip to number/label format: 20+ / 30+ / Millions
+- Built all 9 sections with scroll animations, count-up, alternating case study layouts
+- Deployed to Vercel at joet.build
+- Tagged `v1.0` on main
+
+### v2.0 (2026-04-10)
+- Full visual redesign: Dark Craft / Executive Blue aesthetic
+- New fonts: Anybody (display + body) + DM Mono (labels/code)
+- Infinite grid hero with mouse spotlight (pure CSS + React, no new dependencies)
+- Accent color: amber → steel blue `#5b8fd4`
+- Case study images restored (casestudy-1/2/3.webp) with `next/image`
+- Third AI project added: Rental Tax Pipeline
+- Count-up animation fixed — scroll listener replaces unreliable IntersectionObserver
+- WCAG improvements: contrast, focus rings, aria labels, skip link
+- Tagged `v2.0` on main, pushed to GitHub
 
 ---
 
@@ -23,68 +33,50 @@
 
 | Decision | Rationale |
 |---|---|
-| Cut "How I Think" section | Copy felt generic and sales-like. Case studies carry the narrative weight instead. |
-| Copy doc is source of truth | Wireframe copy was Framer AI placeholder — not accurate |
-| No dollar figure in credibility strip | Couldn't verify the number. Replaced with "Millions / Users impacted" |
-| Credibility stats: 20+ years, 30+ launches, Millions of users | Accurate and defensible |
-| Dark theme: #0a0a0a background | Stripe/Linear/Vercel aesthetic |
-| Accent color: slate blue #4A6FA5 | Professional, not flashy |
-| Font: Inter / Geist | Clean executive feel, widely used in premium tech products |
-| No icons unless minimal SVG inline | Avoid generic icon library look |
-| Case studies de-identified | Real clients not named. "Details available upon request." on each |
-| Nav: "Sarun (Joe) Teeravechyan" left, anchor links right | Simple, clean, no hamburger for MVP |
-| Name: Sarun (Joe) Teeravechyan | Full name used throughout site |
-| Meta title: "Sarun (Joe) Teeravechyan - Digital Leader & AI Systems Design" | SEO and link sharing |
-| Documents at project root | Best practice — CLAUDE.md auto-read, all docs colocated |
-| Two AI project cards for MVP | Job Search Tool + Task Manager. More cards later. |
+| Cut "How I Think" section | Copy felt generic. Case studies carry narrative weight |
+| No dollar figures in credibility strip | Couldn't verify. Replaced with "Millions / Users impacted" |
+| Credibility stats: 20+ years, 30+ programs, 10M+ users | Accurate and defensible |
+| v2 accent: steel blue `#5b8fd4` (not amber) | Blue reads as executive/institutional; amber reads as technical/builder |
+| v2 fonts: Anybody + DM Mono | Distinctive wide display type vs. generic Inter/Geist |
+| Infinite grid hero | Technical credibility signal — interactive, premium feel |
+| Ghost watermark removed | Too heavy, interfered with clean composition |
+| Count-up uses scroll listener, not IntersectionObserver | More reliable at hero/strip boundary on all screen sizes and browsers |
+| `text-muted` bumped to `#777777` | `#444444` only passed 2.25:1 contrast — fails WCAG AA |
+| Case study images restored | Midjourney artwork adds premium visual weight; `alt=""` (decorative) per WCAG |
+| No framer-motion dependency | Grid + spotlight implemented with pure CSS + React state |
+| Dev reference files gitignored (`components/comp_*.md`) | Not part of the site; kept local for reference only |
 
 ---
 
 ## Open Questions
-- [ ] Any preference on domain name? (e.g. sarunt.com, joet.co)
-- [x] Favicon: "ST" monogram in slate blue accent
+- [ ] Custom domain renewal — ensure joet.build auto-renews
+- [ ] OG image — current one reflects v1 design; consider updating to v2 screenshot
 
 ---
 
-## Next Steps
-1. Initialize Next.js project with TypeScript + Tailwind
-2. Git init + GitHub repo
-3. First pass: get all sections rendering with correct copy
-4. Second pass: typography, spacing, and color refinement
-5. Third pass: mobile responsiveness
-6. Deploy to Vercel
-7. Connect custom domain
+## Next Steps (Post v2.0)
+- Update OG image to reflect v2 design
+- Monitor for any responsive issues on real devices
+- Consider adding a 4th AI project card when next project is ready
+- Consider adding a resume download link
 
 ---
 
 ## Session Log
 
 ### Session 1 — Project Setup
-- Reviewed playbook and copy doc
-- Refined copy and site structure
-- Made key design and content decisions
+- Defined structure, copy, design decisions
 - Created CLAUDE.md, DESIGN_SYSTEM.md, WORKING_NOTES.md
-- Ready to build
 
-### Session 2 — Foundation (2026-04-03)
-- Resolved all open questions (LinkedIn URL, email, name, credibility format)
-- Removed "How I Think" section from copy
-- Added Task Manager card to AI Projects copy
-- Updated credibility strip to number/label table format
-- Moved all project docs from /docs to project root
-- Updated CLAUDE.md with accessibility, performance, responsive breakpoint standards
-- Updated global CLAUDE.md (model-agnostic co-author, commands section optional)
-- Ready to begin Next.js build
+### Session 2 — v1.0 Build (2026-04-03/04)
+- Built all 9 sections
+- Deployed to Vercel, tagged v1.0
 
-### Session 2 (continued) — First Build Pass (2026-04-03)
-- Brainstormed design direction with visual companion (mockups in .superpowers/brainstorm/)
-- Decided: geometric grid hero (B), left-aligned, all four blue accent placements
-- Decided: alternating case study layouts, image placeholders for hero + case studies
-- Decided: scroll animations (fade-up, fade-left/right, scale-up, count-up)
-- Shifted color palette from gray-black to blue-tinted dark (new tokens in DESIGN_SYSTEM.md)
-- Wrote design spec and implementation plan
-- Scaffolded Next.js project (Tailwind v4 auto-installed — adapted theme to @theme block)
-- Built all 9 sections: Nav, Hero, CredibilityStrip, WhatIDo, CaseStudy×3, AIProjects, About, CTA, Footer
-- All scroll animations working, count-up animation working
-- Production build passes with zero errors
-- GitHub repo: steerave/professional-website
+### Session 3 — v2.0 Redesign (2026-04-10)
+- Brainstormed v2 direction with visual companion
+- Approved design: Dark Craft / Amber (later switched to Executive Blue)
+- Wrote design spec: `docs/superpowers/specs/2026-04-10-v2-redesign-design.md`
+- Wrote implementation plan: `docs/superpowers/plans/2026-04-10-v2-redesign.md`
+- Implemented all 11 components + layout + globals
+- Polish pass: color swap amber→blue, case study images, WCAG, animation fixes
+- Deployed v2.0 to production, tagged v2.0

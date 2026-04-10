@@ -1,146 +1,133 @@
 # DESIGN_SYSTEM.md — Sarun (Joe) Teeravechyan Portfolio Site
 
+> **Version:** v2.0 (2026-04-10)
+> Previous version (`v1.0`) used blue-tinted dark theme with Inter/Geist fonts. See git tag `v1.0`.
+
 ## Design Direction
-Dark, minimal, executive. Blue-tinted dark theme inspired by Stripe, Linear, and Vercel.
-Quiet confidence. Let typography, spacing, and subtle blue glows do the work.
+
+Dark Craft / Executive Blue. Near-black background with a steel blue accent.
+Quiet confidence. Anybody wide display type paired with DM Mono for technical labels.
+Infinite grid hero with mouse spotlight. Premium spacing. Zero decoration.
 
 ---
 
 ## Colors
 
-| Token | Hex | Usage |
-|---|---|---|
-| Background | `#0b0e14` | Page background |
-| Surface | `#131720` | Credibility strip, CTA section |
-| Elevated | `#1a1f2b` | Impact boxes, card backgrounds |
-| Border | `#252d3a` | Dividers, card borders |
-| Text Primary | `#ffffff` | Headlines, titles, key insights |
-| Text Body | `#b0b8c4` | Body text, descriptions, bullet items |
-| Text Muted | `#6b7a8d` | Labels, disclaimers, nav links |
-| Accent | `#4A6FA5` | CTA buttons, impact borders, bullet markers |
-| Accent Light | `#5a8abf` | Credibility numbers, section labels, hover states |
-| Accent Glow | `rgba(74,111,165,*)` | Background glows, button shadows, dividers |
+All tokens are defined in `app/globals.css` under `@theme`.
 
-No additional colors without explicit approval. Accent glows are permitted as defined in the design spec.
+| Token | CSS Variable | Hex | Usage |
+|---|---|---|---|
+| Background | `--color-bg` | `#080808` | Page background |
+| Surface | `--color-surface` | `#111111` | Card backgrounds, CTA section |
+| Elevated | `--color-elevated` | `#1a1a1a` | Card hover state |
+| Border | `--color-border` | `#1e1e1e` | Dividers, card borders |
+| Text Primary | `--color-text-primary` | `#ffffff` | Headlines, titles |
+| Text Body | `--color-text-body` | `#999999` | Body text, descriptions |
+| Text Muted | `--color-text-muted` | `#777777` | Labels, muted elements (≥5.2:1 contrast — WCAG AA) |
+| Accent | `--color-accent` | `#5b8fd4` | Buttons, borders, labels, highlights |
+| Accent Light | `--color-accent-light` | `#7aaee0` | Hover states, lighter accent use |
+
+**Accent rgba base:** `rgba(91, 143, 212, α)` — used for glows, tints, and soft borders.
+
+No additional colors without explicit approval.
 
 ---
 
 ## Typography
 
-**Font:** Inter (primary). Geist as fallback. Both available via Google Fonts or next/font.
+**Display / Headings / Body:** [Anybody](https://fonts.google.com/specimen/Anybody) — loaded via `next/font/google`
+**Labels / Code / Technical:** [DM Mono](https://fonts.google.com/specimen/DM+Mono) — loaded via `next/font/google`
 
-| Element | Size | Weight | Line Height |
-|---|---|---|---|
-| Hero headline | 64–72px | 700 | 1.1 |
-| Section heading | 40–48px | 700 | 1.2 |
-| Credibility numbers | 48–56px | 700 | 1.0 |
-| Card title | 22–24px | 600 | 1.3 |
-| Body text | 17–18px | 400 | 1.7 |
-| Small / label | 13–14px | 400 | 1.5 |
-| Disclaimer | 13px | 400 | 1.5 |
+| Element | Font | Weight | Size | Notes |
+|---|---|---|---|---|
+| Hero name | Anybody | 900 | `clamp(44px, 7.5vw, 78px)` | Uppercase, tracking -2px |
+| Section heading | Anybody | 900 | `clamp(28px, 4.5vw, 48px)` | Uppercase, tracking -1px |
+| Card title | Anybody | 700 | 17–18px | |
+| Body / overview | Anybody | 300 | 17px | line-height 1.8 |
+| Small body / bullets | Anybody | 300 | 14–15px | line-height 1.75 |
+| Section labels | DM Mono | 400 | 10px | Uppercase, tracking 3px, accent color |
+| Stats / numbers | DM Mono | 500 | `clamp(40px, 5vw, 52px)` | Accent color |
+| Nav / buttons | DM Mono / Anybody | 400–700 | 11px | Uppercase, tracking 1.5–2px |
 
-**Rules:**
-- Never compress line height below these values
-- Hero headline should feel large and commanding — err toward 72px on desktop
-- Muted text uses `Text Muted` color, never a smaller font size alone
+**Rule:** Never use `font-serif` or system fonts. All display and body copy uses Anybody. All labels, code, and technical UI use DM Mono.
 
 ---
 
 ## Spacing
 
-This site uses generous spacing. When in doubt, add more space, not less.
-
 | Context | Value |
 |---|---|
-| Section vertical padding | 120px desktop / 80px mobile |
-| Between section heading and content | 48–64px |
-| Between cards in a grid | 32px |
-| Card internal padding | 40px |
-| Between bullet points | 12px |
-| Credibility strip vertical padding | 64px |
+| Section vertical padding | `lg:py-[120px]` / `py-20` mobile |
+| Max content width | `1200px` (`max-w-content`) |
+| Max about column width | `680px` |
+| Horizontal padding | `px-6` / `md:px-10` / `lg:px-20` |
+| Card internal padding | `p-8` (32px) |
+| Gap between cards | `gap-5` (20px) |
 
-**Rule:** Never reduce spacing to fit content. If something feels tight, the content needs to be restructured, not the spacing compressed.
+**Rule:** Never reduce spacing to fit content. If something feels tight, restructure the content.
+
+---
+
+## Hero Section
+
+- **Grid base layer:** faint blue lines (`rgba(91,143,212,0.04)`), infinite diagonal scroll animation (`@keyframes gridScroll`)
+- **Grid spotlight layer:** brighter blue lines (`rgba(91,143,212,0.18)`), revealed via `mask-image: radial-gradient` at cursor position using inline React state (`mousePos`)
+- **Ambient glow:** top-right radial bloom, `rgba(91,143,212,0.09)`
+- **Entrance animation:** `.hero-animate-1/2/3/4` CSS keyframe stagger (0.15s–0.70s delays)
+- **Breadcrumb:** `~/portfolio · main ›` in DM Mono
 
 ---
 
 ## Components
 
 ### Nav
-- Sticky, top of page
-- Background: `#0a0a0a` with subtle bottom border `#2a2a2a`
-- Left: "Sarun (Joe) Teeravechyan" in medium weight
-- Right: anchor links — Work, About, Connect
-- Links in `Text Muted`, hover to `Text Primary`
-- No mobile hamburger required for MVP — can hide nav links on mobile
-
-### Hero
-- Full viewport height or close to it (min-height: 90vh)
-- Content centered vertically and horizontally or left-aligned with generous left padding
-- Headline then subheadline then CTAs then disclaimer
-- Gap between headline and subheadline: 24px
-- Gap between subheadline and CTAs: 40px
-
-### CTA Buttons
-- Primary: Background `Accent`, text white, no border, padding 14px 28px
-- Secondary: Background transparent, border `Accent`, text `Accent`, padding 14px 28px
-- Border radius: 6px
-- Hover: Primary darkens slightly, Secondary fills with accent
+- Sticky, `z-[100]`, `bg-[rgba(8,8,8,0.88)]` + `backdrop-blur-[20px]`
+- Left: `SJT` monogram in DM Mono accent
+- Right: Work / About / Connect in DM Mono, accent hover
 
 ### Credibility Strip
-- Background: `Surface` (#111111)
-- Three stat blocks in a row with vertical dividers between them
-- Number: large bold, `Text Primary`
-- Label: small, `Text Muted`
-- Centered content, generous vertical padding
+- Three stats with vertical dividers on `md:` and above
+- Count-up triggered by scroll listener + immediate mount check
+- Respects `prefers-reduced-motion` (jumps to final value)
+- Screen reader accessible: `aria-label` on each stat, `aria-hidden` on animated elements
 
-### What I Do Cards
-- Three equal columns
-- Border: `Border` (#2a2a2a), no background fill
-- Padding: 40px
-- Title: Card title size, `Text Primary`
-- Body: Body text size, `Text Muted`
+### What I Do / AI Projects Cards
+- `border-l-[3px]` in `rgba(91,143,212,0.35–0.45)`
+- `bg-surface` → `hover:bg-elevated`
+- Subtle blue hover tint overlay `rgba(91,143,212,0.03)`
 
-### Case Study Layout
-Each case study is a full-width section separated by a top border (`Border`).
-
-Structure per case study:
-1. Large bold title (Section heading size)
-2. Overview paragraph (Body text, `Text Muted`)
-3. Two-column grid:
-   - Left: "Challenge" heading + bullet list
-   - Right: "What I Did" heading + bullet list
-4. Impact box: background `Elevated` (#1a1a1a), left border 3px `Accent`, padding 32px
-5. Key Insight: bold italic, slightly larger than body, `Text Primary`
-6. Disclaimer line: small, `Text Muted`
-
-### AI Projects
-- Single card for MVP, designed to accommodate more cards later
-- Same card style as What I Do but full width or two-column grid
-- Sections within card: What it does / How it works / Why it matters
-
-### About
-- Single column, max-width 680px, centered or left-aligned consistent with page grid
-- Three paragraphs, body text, generous paragraph spacing (32px between)
+### Case Studies
+- Alternating layout: text left / image right, then image left / text right
+- `CaseStudyImage`: sticky on desktop (`lg:sticky lg:top-[100px]`), `next/image` with `object-cover`
+- Impact box: `border-l-[3px] border-accent` + `rgba(91,143,212,0.05)` background
+- Key insight: italic Anybody 300 with soft blue left border
 
 ### CTA Section
-- Full width, centered
-- Background: `Surface` (#111111)
-- Large heading, then two buttons side by side (LinkedIn, Email)
-- Same button styles as Hero CTAs
+- Amber glow fades in on section enter (IntersectionObserver, threshold 0.3)
+- LinkedIn: `bg-accent text-white`
+- Email: ghost border button
+
+### Section Glow Dividers
+- `.section-glow` — 1px horizontal gradient centered on accent
 
 ---
 
-## Layout Grid
-- Max content width: 1200px
-- Horizontal page padding: 80px desktop / 40px tablet / 24px mobile
-- All sections respect this grid
+## Accessibility (WCAG 2.1 AA)
+
+- All text colors meet 4.5:1 contrast ratio against respective backgrounds
+- `:focus-visible` ring: 2px solid accent, 3px offset — on all interactive elements
+- Skip-to-content link: visible on keyboard focus, hidden otherwise
+- Animated elements respect `prefers-reduced-motion`
+- `aria-label` on stat numbers; animated display is `aria-hidden`
+- Case study images use `alt=""` (decorative) per WCAG F38
 
 ---
 
 ## Do Not
-- Add decorative shapes, blobs, or background patterns
-- Use box shadows that look generic or templated
-- Introduce icon libraries (if icons are needed, use minimal SVG inline)
-- Add animations beyond subtle fade-in on scroll (optional, low priority)
-- Use any color not defined in this document without approval
+
+- Use any color not defined here without approval
+- Use `font-serif`, Inter, or system fonts
+- Add decorative shapes, blobs, or background patterns beyond defined glows
+- Introduce icon libraries
+- Reduce spacing to fit content
 - Add sections or copy not in `personal_website_copy.md`

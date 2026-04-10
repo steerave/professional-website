@@ -4,25 +4,26 @@
 
 **Live site: [joet.build](https://www.joet.build)**
 
-Personal portfolio website showcasing digital leadership experience and AI projects.
+Personal portfolio website for a senior digital leader and AI systems builder. Showcases de-identified case studies, AI projects, and professional background.
 
 ## Tech Stack
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS v4
+- Next.js 16 (App Router)
+- TypeScript (strict)
+- Tailwind CSS v4 (`@theme` CSS-first config)
+- Anybody + DM Mono via `next/font/google`
 - Deployed on Vercel
 
 ## Features
 
-- Blue-tinted dark theme inspired by Stripe/Linear/Vercel
-- Scroll-triggered animations with IntersectionObserver
-- Count-up credibility stats
-- Alternating case study layouts with image placeholders
-- Fully responsive (mobile, tablet, desktop)
-- SVG favicon
-- SEO meta tags and Open Graph support
-- Reduced motion support for accessibility
+- Executive blue dark theme (`#080808` bg, `#5b8fd4` accent)
+- Infinite grid hero with interactive mouse spotlight
+- Scroll-triggered animations (fade, slide, scale) via IntersectionObserver
+- Count-up credibility stats with scroll-triggered activation
+- Alternating case study layouts with `next/image`
+- Fully responsive — mobile, tablet, desktop
+- WCAG 2.1 AA: contrast ratios, focus rings, skip link, reduced motion support
+- SEO metadata and Open Graph tags
 
 ## Getting Started
 
@@ -36,11 +37,35 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Project Structure
 
 ```
-app/            → Root layout, page, global styles
-components/     → Modular section components
-public/         → Static assets
+app/
+  layout.tsx       — Root layout, fonts, metadata, skip-to-content
+  page.tsx         — Home page, assembles all sections
+  globals.css      — Tailwind @theme tokens, animations, utilities
+components/
+  Nav.tsx
+  Hero.tsx
+  CredibilityStrip.tsx
+  WhatIDo.tsx
+  CaseStudy.tsx
+  AIProjects.tsx
+  About.tsx
+  CTA.tsx
+  Footer.tsx
+  ScrollReveal.tsx
+public/
+  casestudy-1.webp / casestudy-2.webp / casestudy-3.webp
+docs/
+  superpowers/specs/   — Design specs
+  superpowers/plans/   — Implementation plans
 ```
 
 ## Deployment
 
 Deployed automatically via Vercel on push to `main`.
+
+## Versions
+
+| Tag | Date | Description |
+|---|---|---|
+| `v2.0` | 2026-04-10 | Full redesign — Executive Blue, Anybody fonts, grid hero, WCAG |
+| `v1.0` | 2026-04-04 | Initial launch — blue-tinted dark theme, Inter/Geist fonts |
