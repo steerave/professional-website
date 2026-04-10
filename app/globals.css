@@ -1,22 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0b0e14;
-  --color-surface: #131720;
-  --color-elevated: #1a1f2b;
-  --color-border: #252d3a;
+  --color-bg: #080808;
+  --color-surface: #111111;
+  --color-elevated: #1a1a1a;
+  --color-border: #1e1e1e;
   --color-text-primary: #ffffff;
-  --color-text-body: #b0b8c4;
-  --color-text-muted: #6b7a8d;
-  --color-accent: #4A6FA5;
-  --color-accent-light: #5a8abf;
+  --color-text-body: #999999;
+  --color-text-muted: #444444;
+  --color-accent: #ff9f2f;
+  --color-accent-light: #ffb347;
 
   --max-width-content: 1200px;
   --max-width-about: 680px;
 
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), Georgia, serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-sans: var(--font-anybody), sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -31,7 +30,7 @@
   }
 }
 
-/* Scroll animation classes */
+/* ─── Scroll reveal animations ─────────────────────────────────────────────── */
 @layer utilities {
   .anim {
     opacity: 0;
@@ -43,60 +42,94 @@
     opacity: 1;
     transform: translateX(0) translateY(0) scale(1);
   }
-  .anim-fade-up {
-    transform: translateY(30px);
-  }
-  .anim-fade-left {
-    transform: translateX(-40px);
-  }
-  .anim-fade-right {
-    transform: translateX(40px);
-  }
-  .anim-scale-up {
-    transform: scale(0.92);
-  }
-  .anim-slide-left {
-    transform: translateX(-30px);
-  }
+  .anim-fade-up    { transform: translateY(30px); }
+  .anim-fade-left  { transform: translateX(-40px); }
+  .anim-fade-right { transform: translateX(40px); }
+  .anim-scale-up   { transform: scale(0.92); }
+  .anim-slide-left { transform: translateX(-30px); }
 }
 
-/* Hero load animations — CSS keyframes, not scroll-triggered */
-@keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes heroScaleIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.hero-animate-1 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
-.hero-animate-2 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
-.hero-animate-3 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
-.hero-animate-4 { opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; }
-.hero-animate-image { opacity: 0; animation: heroScaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
-
-/* Stagger delays for scroll animations */
+/* Stagger delays */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
 .delay-400 { transition-delay: 0.4s; }
 .delay-500 { transition-delay: 0.5s; }
 
-/* Respect reduced motion */
+/* ─── Hero entrance animations ──────────────────────────────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate-1 { opacity: 0; animation: heroFadeUp 0.9s var(--ease-out-expo) 0.15s forwards; }
+.hero-animate-2 { opacity: 0; animation: heroFadeUp 0.9s var(--ease-out-expo) 0.35s forwards; }
+.hero-animate-3 { opacity: 0; animation: heroFadeUp 0.9s var(--ease-out-expo) 0.55s forwards; }
+.hero-animate-4 { opacity: 0; animation: heroFadeUp 0.9s var(--ease-out-expo) 0.70s forwards; }
+
+/* ─── Infinite grid (adapted from the-infinite-grid component) ──────────────── */
+/* Diagonal scroll keyframe — both layers share the same animation so they
+   stay perfectly in phase. Background-position scrolls by one tile (40×40px). */
+@keyframes gridScroll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* Base layer — always visible, very faint amber lines */
+.hero-grid-base {
+  background-image:
+    linear-gradient(rgba(255, 159, 47, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 159, 47, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridScroll 6s linear infinite;
+}
+
+/* Spotlight layer — brighter grid revealed only at mouse cursor position.
+   --mouse-x / --mouse-y are set via JS on onMouseMove.
+   Default of -9999px keeps the spotlight off-screen until the user moves. */
+.hero-grid-spotlight {
+  background-image:
+    linear-gradient(rgba(255, 159, 47, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 159, 47, 0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridScroll 6s linear infinite;
+  mask-image: radial-gradient(
+    350px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+    black,
+    transparent
+  );
+  -webkit-mask-image: radial-gradient(
+    350px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+    black,
+    transparent
+  );
+}
+
+/* ─── Section glow divider ──────────────────────────────────────────────────── */
+.section-glow {
+  height: 1px;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 159, 47, 0.18) 50%,
+    transparent 100%
+  );
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .anim, .hero-animate-1, .hero-animate-2, .hero-animate-3, .hero-animate-4, .hero-animate-image {
+  .anim,
+  .hero-animate-1,
+  .hero-animate-2,
+  .hero-animate-3,
+  .hero-animate-4,
+  .hero-grid-base,
+  .hero-grid-spotlight {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
     transition: none !important;
   }
-}
-
-/* Section glow divider */
-.section-glow {
-  height: 1px;
-  max-width: var(--max-width-content);
-  margin: 0 auto;
-  background: linear-gradient(90deg, transparent 0%, rgba(74,111,165,0.25) 50%, transparent 100%);
 }

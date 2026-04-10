@@ -1,71 +1,170 @@
-import Image from "next/image";
+"use client";
+
+import { useCallback } from "react";
 
 export default function Hero() {
+  // Track mouse position and write to CSS custom properties.
+  // The .hero-grid-spotlight layer uses these to position its radial mask.
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      e.currentTarget.style.setProperty(
+        "--mouse-x",
+        `${e.clientX - rect.left}px`
+      );
+      e.currentTarget.style.setProperty(
+        "--mouse-y",
+        `${e.clientY - rect.top}px`
+      );
+    },
+    []
+  );
+
   return (
     <section
+      id="hero"
       aria-label="Introduction"
-      className="relative min-h-[90vh] overflow-hidden bg-bg"
+      className="relative flex min-h-[90vh] items-center overflow-hidden bg-bg"
+      onMouseMove={handleMouseMove}
     >
-      {/* Background image */}
-      <Image
-        src="/hero-bg.webp"
-        alt=""
-        fill
-        priority
-        className="pointer-events-none object-cover"
-        sizes="100vw"
+      {/* ── Grid layer 1: base — faint amber, always scrolling ───────────── */}
+      <div
+        aria-hidden="true"
+        className="hero-grid-base pointer-events-none absolute inset-0"
       />
 
-      {/* Dark overlay for text readability */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(11,14,20,0.45)_0%,rgba(11,14,20,0.8)_60%,rgba(11,14,20,0.95)_100%)]" />
+      {/* ── Grid layer 2: spotlight — brighter, reveals at cursor ─────────── */}
+      <div
+        aria-hidden="true"
+        className="hero-grid-spotlight pointer-events-none absolute inset-0"
+      />
 
-      {/* Bottom fade to page background */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1] h-[300px] bg-gradient-to-b from-transparent to-bg" />
+      {/* ── Ambient glow — top-right corner, single amber bloom ───────────── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute"
+        style={{
+          top: "-100px",
+          right: "-80px",
+          width: "560px",
+          height: "560px",
+          background:
+            "radial-gradient(circle, rgba(255,159,47,0.09) 0%, transparent 65%)",
+        }}
+      />
 
-      {/* Subtle accent glows on top of image */}
-      <div className="pointer-events-none absolute left-[10%] top-[20%] z-[1] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(74,111,165,0.12)_0%,transparent_60%)] blur-[80px]" />
-      <div className="pointer-events-none absolute bottom-[20%] right-[15%] z-[1] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(90,138,191,0.08)_0%,transparent_60%)] blur-[60px]" />
+      {/* ── Ghost surname — bottom-anchored, behind all content ───────────── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute select-none whitespace-nowrap"
+        style={{
+          bottom: "-8px",
+          left: "-6px",
+          fontFamily: "var(--font-anybody)",
+          fontWeight: 900,
+          fontSize: "clamp(72px, 13vw, 136px)",
+          color: "rgba(255,255,255,0.022)",
+          lineHeight: 1,
+          letterSpacing: "-4px",
+          textTransform: "uppercase",
+        }}
+      >
+        TEERAVECHYAN
+      </div>
 
-      {/* Content — single column, centered */}
-      <div className="relative z-[2] mx-auto flex min-h-[90vh] max-w-content flex-col items-center justify-center px-6 py-[120px] text-center md:px-10 lg:px-20">
-        {/* Name — the hero */}
-        <h1 className="hero-animate-1 border-l border-white/20 pl-3 text-[clamp(2rem,10vw,5.25rem)] font-medium uppercase leading-[0.95] tracking-[0.05em] text-text-primary md:pl-5 md:tracking-[0.08em]">
-          Sarun (Joe)
+      {/* ── Hero content ─────────────────────────────────────────────────── */}
+      <div className="relative z-10 mx-auto w-full max-w-content px-6 py-[120px] md:px-10 lg:px-20">
+
+        {/* Breadcrumb */}
+        <div
+          className="hero-animate-1 mb-7 flex items-center gap-[6px] font-mono"
+          style={{ fontSize: "10px", letterSpacing: "2px" }}
+        >
+          <span style={{ color: "#ff9f2f" }}>~/</span>
+          <span style={{ color: "#2e2e2e" }}>portfolio</span>
+          <span style={{ color: "#1e1e1e" }}>·</span>
+          <span style={{ color: "#243824" }}>main</span>
+          <span style={{ color: "#ff9f2f" }}>›</span>
+        </div>
+
+        {/* Name */}
+        <h1
+          className="hero-animate-2 uppercase leading-[0.96]"
+          style={{
+            fontFamily: "var(--font-anybody)",
+            fontWeight: 900,
+            fontSize: "clamp(44px, 7.5vw, 78px)",
+            letterSpacing: "-2px",
+            color: "#ffffff",
+          }}
+        >
+          SARUN
           <br />
-          Teeravechyan
+          <span style={{ color: "#ff9f2f" }}>TEERAVECHYAN</span>
         </h1>
 
-        {/* Title / subtitle */}
-        <p className="hero-animate-2 mt-6 font-mono text-sm uppercase tracking-[0.2em] text-accent-light md:text-base">
-          Digital Leader &amp; AI Systems Builder
-        </p>
-
-        {/* Description */}
-        <p className="hero-animate-3 mt-8 max-w-[600px] font-serif text-base leading-[1.7] text-text-body md:text-lg">
+        {/* Tagline */}
+        <p
+          className="hero-animate-3 mt-7"
+          style={{
+            fontFamily: "var(--font-anybody)",
+            fontWeight: 300,
+            fontSize: "16px",
+            color: "#5a5a5a",
+            lineHeight: 1.75,
+            maxWidth: "460px",
+          }}
+        >
           Senior digital leader delivering complex, high-visibility programs
           across North America — now focused on applying AI to transform how
           systems are designed, operated, and scaled.
         </p>
 
         {/* CTAs */}
-        <div className="hero-animate-4 mt-10 flex gap-4">
+        <div className="hero-animate-4 mt-10 flex flex-wrap gap-3">
           <a
             href="#work"
-            className="inline-block rounded-md bg-accent px-7 py-3.5 text-[15px] text-white shadow-[0_0_20px_rgba(74,111,165,0.2)] transition-all hover:bg-accent-light hover:shadow-[0_0_30px_rgba(74,111,165,0.35)]"
+            className="group inline-flex items-center gap-2 rounded-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+            style={{
+              fontFamily: "var(--font-anybody)",
+              fontWeight: 700,
+              fontSize: "11px",
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              padding: "13px 26px",
+              background: "#ff9f2f",
+              color: "#000",
+              textDecoration: "none",
+              boxShadow: "0 0 0 0 rgba(255,159,47,0.4)",
+            }}
           >
             View Work
           </a>
           <a
             href="#connect"
-            className="inline-block rounded-md border border-[rgba(74,111,165,0.4)] bg-transparent px-7 py-3.5 text-[15px] text-accent-light transition-all hover:border-accent-light hover:bg-[rgba(74,111,165,0.1)] hover:text-white"
+            className="inline-flex items-center rounded-sm transition-all duration-200 hover:border-[#3a3a3a] hover:text-text-body active:scale-[0.98]"
+            style={{
+              fontFamily: "var(--font-anybody)",
+              fontWeight: 300,
+              fontSize: "11px",
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              padding: "13px 26px",
+              border: "1px solid #242424",
+              color: "#444",
+              textDecoration: "none",
+            }}
           >
             Connect
           </a>
         </div>
 
         {/* Disclaimer */}
-        <p className="hero-animate-4 mt-6 text-[13px] text-text-muted">
-          De-identified work. Details available upon request.
+        <p
+          className="hero-animate-4 mt-6 font-mono"
+          style={{ fontSize: "10px", color: "#2a2a2a", letterSpacing: "1.5px" }}
+        >
+          DE-IDENTIFIED WORK · DETAILS AVAILABLE UPON REQUEST
         </p>
       </div>
     </section>

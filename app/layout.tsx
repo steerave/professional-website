@@ -1,23 +1,27 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Newsreader } from "next/font/google";
+import { Anybody, DM_Mono } from "next/font/google";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const anybody = Anybody({
   subsets: ["latin"],
+  weight: ["200", "300", "400", "700", "900"],
+  variable: "--font-anybody",
   display: "swap",
-  variable: "--font-newsreader",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-dm-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Sarun (Joe) Teeravechyan - Digital Leader & AI Systems Design",
+  title: "Sarun (Joe) Teeravechyan - Digital Leader & AI Systems Builder",
   description:
     "Senior digital leader delivering complex programs at scale. Building AI systems to transform how digital systems are designed and executed.",
   openGraph: {
-    title: "Sarun (Joe) Teeravechyan - Digital Leader & AI Systems Design",
+    title: "Sarun (Joe) Teeravechyan - Digital Leader & AI Systems Builder",
     description:
       "Senior digital leader delivering complex programs at scale. Building AI systems to transform how digital systems are designed and executed.",
     type: "website",
@@ -30,10 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${newsreader.variable}`}
-    >
+    <html lang="en" className={`${anybody.variable} ${dmMono.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

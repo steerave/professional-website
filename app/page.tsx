@@ -118,17 +118,36 @@ export default function Home() {
         {/* Case Studies overview */}
         <div className="mx-auto max-w-content px-6 pb-16 pt-20 md:px-10 lg:pb-24 lg:px-20 lg:pt-[120px]">
           <ScrollReveal>
-            <p className="font-mono text-[13px] font-semibold uppercase tracking-[1.5px] text-accent-light">
-              Case Studies
+            <p
+              className="font-mono text-accent"
+              style={{ fontSize: "10px", letterSpacing: "3px" }}
+            >
+              CASE STUDIES
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h2 className="mb-6 mt-4 text-[44px] font-bold leading-[1.2] text-text-primary">
+            <h2
+              className="mb-6 mt-4 uppercase leading-none text-text-primary"
+              style={{
+                fontFamily: "var(--font-anybody)",
+                fontWeight: 900,
+                fontSize: "clamp(28px, 4.5vw, 48px)",
+                letterSpacing: "-1px",
+              }}
+            >
               Selected Work
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={200}>
-            <p className="max-w-[800px] font-serif text-text-body">
+            <p
+              className="max-w-[800px] text-text-body"
+              style={{
+                fontFamily: "var(--font-anybody)",
+                fontWeight: 300,
+                fontSize: "17px",
+                lineHeight: 1.8,
+              }}
+            >
               De-identified case studies representing large-scale digital
               execution across national North American programs. These examples highlight
               execution under complexity, transformation through technology, and
@@ -148,27 +167,69 @@ export default function Home() {
         <div className="mx-auto max-w-content px-6 pb-20 md:px-10 lg:px-20 lg:pb-[120px]">
           <div className="section-glow mb-16" />
           <ScrollReveal>
-            <div className="rounded-r-lg border-l-[3px] border-accent bg-[linear-gradient(90deg,rgba(74,111,165,0.1)_0%,#1a1f2b_100%)] p-8">
-              <p className="mb-4 text-lg font-semibold text-text-primary">
+            <div
+              className="rounded-r-sm border-l-[3px] border-accent p-8"
+              style={{ background: "rgba(255,159,47,0.05)" }}
+            >
+              <p
+                className="mb-4 text-text-primary"
+                style={{
+                  fontFamily: "var(--font-anybody)",
+                  fontWeight: 700,
+                  fontSize: "15px",
+                }}
+              >
                 Across these programs, a consistent pattern emerges:
               </p>
               <ul className="space-y-2">
-                <li className="relative pl-4 font-serif text-[15px] text-text-body">
-                  <span className="absolute left-0 text-accent-light">•</span>
+                <li
+                  className="relative pl-4 text-text-body"
+                  style={{
+                    fontFamily: "var(--font-anybody)",
+                    fontWeight: 300,
+                    fontSize: "14px",
+                    lineHeight: 1.75,
+                  }}
+                >
+                  <span className="absolute left-0 text-accent" style={{ fontSize: "12px" }}>›</span>
                   Leading execution under complexity and scale
                 </li>
-                <li className="relative pl-4 font-serif text-[15px] text-text-body">
-                  <span className="absolute left-0 text-accent-light">•</span>
+                <li
+                  className="relative pl-4 text-text-body"
+                  style={{
+                    fontFamily: "var(--font-anybody)",
+                    fontWeight: 300,
+                    fontSize: "14px",
+                    lineHeight: 1.75,
+                  }}
+                >
+                  <span className="absolute left-0 text-accent" style={{ fontSize: "12px" }}>›</span>
                   Navigating constraints through structured systems and risk
                   management
                 </li>
-                <li className="relative pl-4 font-serif text-[15px] text-text-body">
-                  <span className="absolute left-0 text-accent-light">•</span>
+                <li
+                  className="relative pl-4 text-text-body"
+                  style={{
+                    fontFamily: "var(--font-anybody)",
+                    fontWeight: 300,
+                    fontSize: "14px",
+                    lineHeight: 1.75,
+                  }}
+                >
+                  <span className="absolute left-0 text-accent" style={{ fontSize: "12px" }}>›</span>
                   Applying real-time decision-making to maintain stability and
                   performance
                 </li>
               </ul>
-              <p className="mt-4 font-serif text-text-body">
+              <p
+                className="mt-4 text-text-body"
+                style={{
+                  fontFamily: "var(--font-anybody)",
+                  fontWeight: 300,
+                  fontSize: "14px",
+                  lineHeight: 1.75,
+                }}
+              >
                 These experiences now inform a broader focus on applying AI to
                 further enhance execution, automation, and operational
                 intelligence.
@@ -188,18 +249,42 @@ export default function Home() {
           className="mx-auto max-w-[640px] px-6 py-16 md:px-10 lg:py-20"
         >
           <ScrollReveal>
-            <h3 className="mb-5 text-lg font-medium tracking-tight text-text-primary/80">
+            <h3
+              className="mb-5 text-text-muted"
+              style={{
+                fontFamily: "var(--font-anybody)",
+                fontWeight: 500,
+                fontSize: "13px",
+                letterSpacing: "0.5px",
+              }}
+            >
               How This Site Was Built
             </h3>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <p className="mb-4 font-serif text-[15px] leading-[1.85] text-text-body/80">
+            <p
+              className="mb-4 text-text-muted"
+              style={{
+                fontFamily: "var(--font-anybody)",
+                fontWeight: 300,
+                fontSize: "14px",
+                lineHeight: 1.85,
+              }}
+            >
               This site was created using AI-assisted workflows across design,
               copy, and development.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={200}>
-            <p className="mb-4 font-serif text-[15px] leading-[1.85] text-text-body/80">
+            <p
+              className="mb-4 text-text-muted"
+              style={{
+                fontFamily: "var(--font-anybody)",
+                fontWeight: 300,
+                fontSize: "14px",
+                lineHeight: 1.85,
+              }}
+            >
               The process involved exploring design directions, refining
               structure and layout, and developing content around a clear
               narrative and positioning — all through iterative collaboration
@@ -207,7 +292,15 @@ export default function Home() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={300}>
-            <p className="font-serif text-[15px] leading-[1.85] text-text-body/80">
+            <p
+              className="text-text-muted"
+              style={{
+                fontFamily: "var(--font-anybody)",
+                fontWeight: 300,
+                fontSize: "14px",
+                lineHeight: 1.85,
+              }}
+            >
               This reflects how I approach applying AI in practice: not as a
               shortcut, but as a way to improve clarity, accelerate iteration,
               and enhance execution.

@@ -3,24 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  {
-    numeric: 20,
-    suffix: "+",
-    line1: "Years Leading",
-    line2: "Digital Execution",
-  },
-  {
-    numeric: 30,
-    suffix: "+",
-    line1: "National-Scale",
-    line2: "Programs Delivered",
-  },
-  {
-    numeric: 10,
-    suffix: "M+",
-    line1: "Users Supported",
-    line2: "in Live Systems",
-  },
+  { numeric: 20, suffix: "+",  line1: "Years Leading",    line2: "Digital Execution"   },
+  { numeric: 30, suffix: "+",  line1: "National-Scale",   line2: "Programs Delivered"  },
+  { numeric: 10, suffix: "M+", line1: "Users Supported",  line2: "in Live Systems"     },
 ];
 
 function useCountUp(target: number, active: boolean) {
@@ -37,7 +22,6 @@ function useCountUp(target: number, active: boolean) {
     function tick(now: number) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      // Smooth ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCurrent(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(tick);
@@ -63,28 +47,23 @@ export default function CredibilityStrip() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section
-      aria-label="Key achievements"
-      className="border-y border-[rgba(74,111,165,0.12)] bg-surface"
-    >
+    <section aria-label="Key achievements" className="border-y border-border">
       <div
         ref={ref}
-        className="mx-auto flex max-w-content flex-col items-center gap-10 px-6 py-14 md:flex-row md:gap-0 md:px-10 lg:px-20"
+        className="mx-auto flex max-w-content flex-col items-center gap-12 px-6 py-16 md:flex-row md:gap-0 md:px-10 lg:px-20"
       >
         {stats.map((stat, i) => (
           <div
             key={stat.line1}
             className={`flex-1 text-center ${
-              i < stats.length - 1
-                ? "md:border-r md:border-[rgba(74,111,165,0.1)]"
-                : ""
+              i < stats.length - 1 ? "md:border-r md:border-border" : ""
             }`}
           >
             <StatNumber stat={stat} active={active} />
@@ -105,20 +84,32 @@ function StatNumber({
   const count = useCountUp(stat.numeric, active);
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-3">
       <div className="flex items-baseline">
-        <span className="text-[40px] font-medium leading-none tracking-tight text-text-primary lg:text-[44px]">
+        <span
+          className="font-mono font-medium leading-none text-accent"
+          style={{ fontSize: "clamp(40px, 5vw, 52px)" }}
+        >
           {count}
         </span>
-        <span className="ml-0.5 text-[22px] font-medium leading-none text-accent-light lg:text-[24px]">
+        <span
+          className="ml-1 font-mono font-medium leading-none text-accent"
+          style={{ fontSize: "clamp(20px, 2.5vw, 26px)" }}
+        >
           {stat.suffix}
         </span>
       </div>
-      <div className="mt-1 flex flex-col items-center gap-0">
-        <span className="font-mono text-[12px] uppercase tracking-[0.15em] text-text-muted">
+      <div className="flex flex-col items-center gap-[2px]">
+        <span
+          className="font-sans uppercase text-text-muted"
+          style={{ fontSize: "11px", letterSpacing: "2px", fontWeight: 300 }}
+        >
           {stat.line1}
         </span>
-        <span className="font-mono text-[12px] uppercase tracking-[0.15em] text-text-muted">
+        <span
+          className="font-sans uppercase text-text-muted"
+          style={{ fontSize: "11px", letterSpacing: "2px", fontWeight: 300 }}
+        >
           {stat.line2}
         </span>
       </div>
