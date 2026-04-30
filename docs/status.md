@@ -1,5 +1,29 @@
 # Project Status Log
 
+## 2026-04-30
+
+**Done:**
+- `$impeccable critique` of v2.0 surfaced 5 side-stripe borders, identical WhatIDo+AIProjects card grids, terminal cosplay (`~/portfolio · main ›`, mono labels), em dash overuse, and WCAG AA contrast failures (`#444`, `#2e2e2e`, `#1e1e1e` text on near-black) despite explicit AA claim
+- Built three tonal probe mockups (`mockups/01-editorial.html`, `02-boardroom.html`, `03-quiet-executive.html`) with real Joe content; user picked option C with Inter Tight + Inter and list+detail case study routing
+- Shipped v3.0 quiet executive redesign: dropped Anybody/DM Mono for Inter Tight + Inter, recolored palette so every text token passes ≥4.5:1, cut `WhatIDo` + narrative summary + "How This Site Was Built", killed mouse-spotlight grid + count-up + 5 side-stripes + numbered indices + section-glows
+- Refactored case studies to list+detail pattern: `lib/case-studies.ts` with slugs, `app/work/[slug]/page.tsx` with `generateStaticParams` + per-page metadata, new `CaseStudyListItem` + `CaseStudyDetail` components
+- Wired Resume PDF (`Joe_Teeravechyan_Resume.pdf`) into nav, hero CTA, and Connect section; availability pill with green dot in hero; real LinkedIn/GitHub/Email footer links; "Sarun Teeravechyan" wordmark replacing `SJT` monogram
+- Caught and corrected AI overclaim across hero/about/AI projects/CTA/metadata — AI now framed as organizational adoption study, not applied client work
+- `$impeccable audit` of live v3 surfaced favicon never being served (silently 404'd since v1 — `app/favicon.svg` doesn't match Next.js convention), detail-page LCP image was `loading="lazy"`, sub-44px touch targets, one stray `text-[#0B1220]` hex literal
+- Audit fixes: renamed `app/favicon.svg` → `app/icon.svg` (Next.js auto-injection now works) and refreshed favicon to v3 palette (`#0B0B0F` bg, `#5B8FD4` ST letters), added `priority` + `sizes` to detail hero `Image`, bumped CTAs to `min-h-[44px]` (WCAG 2.2 AAA), added `--color-on-accent` token replacing the last hex literal
+- Saved memory files `joe_positioning.md` and `feedback_no_overclaim.md` — future sessions won't reintroduce AI overclaim in any new copy
+- Tagged and released `v3.0` and same-day patch `v3.0.1`; both deployed via Vercel and serving on joet.build; audit score projection 17/20 → 20/20
+
+**Next:**
+- Real-device mobile smoke test (only desktop curl-verified so far)
+- Update OG image from a v3 hero screenshot
+- Re-run `$impeccable critique` only if the site changes meaningfully (not on a schedule)
+
+**Notes:**
+- 5 commits today: `aebe805` (v3.0 redesign), `c775a7d` (copy honesty), `edfd44f` (favicon refresh), `e2bb1cf` (audit pass), `fba120f` (v3.0.1 release docs)
+- Tags `v3.0` and `v3.0.1` both anchor today's production state
+- PageSpeed Insights API daily quota burned during audit; live Lighthouse score not captured. Code-level audit projects 20/20 across the 5 impeccable dimensions
+
 ## 2026-04-10
 
 **Done:**
