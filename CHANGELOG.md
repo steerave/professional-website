@@ -5,7 +5,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com).
 
 ---
 
-## [Unreleased]
+## [3.0.1] — 2026-04-30
 
 ### Changed
 - Hero, About, AI Projects, CTA, and page metadata copy rewritten to remove AI overclaim. AI is now framed honestly as a study/adoption interest (organizational application, system fit, change management) rather than applied professional experience. New AI Projects subtitle: "I build personal AI projects to stay grounded in the tools — the work I want to lead is the organizational side." Hero headline reduced to a single confident sentence: "I lead complex digital programs at national scale." Page title now "Sarun (Joe) Teeravechyan — Senior Digital Delivery Leader."

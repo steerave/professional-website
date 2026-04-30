@@ -71,6 +71,7 @@ Deployed automatically via Vercel on push to `main`.
 
 | Tag | Date | Description |
 |---|---|---|
+| `v3.0.1` | 2026-04-30 | Copy honesty pass (AI framed as adoption/study), favicon registration fix, LCP priority, touch-target AAA |
 | `v3.0` | 2026-04-30 | Quiet executive — Inter Tight + Inter, list/detail case studies, contrast pass |
 | `v2.0` | 2026-04-10 | Executive Blue — Anybody + DM Mono, grid hero, WCAG attempt |
 | `v1.0` | 2026-04-04 | Initial launch — blue-tinted dark theme, Inter/Geist fonts |

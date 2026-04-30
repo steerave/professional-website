@@ -83,12 +83,22 @@ Triggered by `$impeccable critique` finding multiple anti-pattern violations and
 
 ---
 
-## Next Steps (Post v3.0 build)
+## Next Steps (Post v3.0.1)
 
-1. Visual smoke test on phone + desktop (real browsers).
-2. Tag `v3.0`, push to GitHub, confirm Vercel auto-deploy completes.
-3. Update OG image after first prod render.
-4. Re-run `$impeccable critique` to confirm score lift.
+1. Visual smoke test on phone + real-device browsers (still TODO — only desktop curl-verified).
+2. Update OG image after first prod render (still TODO).
+3. Re-run `$impeccable critique` if/when site changes meaningfully.
+4. Add `priority` to AIProjects-style pattern if expanding to longer-form project pages later.
+
+## v3.0.1 — 2026-04-30 (released)
+
+Released same day as v3.0 to fold in copy honesty + audit fixes:
+- Copy: removed AI overclaim across hero, about, AI projects subtitle, CTA, page metadata; AI now framed as adoption/organizational study, not applied work
+- Favicon: renamed `app/favicon.svg` → `app/icon.svg` so Next.js auto-detection finally injects `<link rel="icon">`. Previously 404'd silently across v1/v2/v3.
+- Perf: `priority` + `sizes` on case study detail hero `Image` (LCP element no longer lazy)
+- A11y: `min-h-[44px]` on all primary CTAs (WCAG 2.2 AAA), `min-h-[40px]` on nav CV button (compact AA)
+- Theming: new `--color-on-accent` token replaces last two `text-[#0B1220]` hex literals
+- Audit projection: 17/20 → 20/20
 
 ---
 
